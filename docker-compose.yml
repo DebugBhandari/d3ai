@@ -21,7 +21,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: kirk824
       MYSQL_HOST: d3aiDatabase
-      PORT: 3001
+      PORT: 3002
       NODE_ENV: production
     depends_on:
       - d3aiDatabase
