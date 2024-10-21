@@ -5,6 +5,11 @@ import mysql from "mysql2/promise";
 const app = express();
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from "url";
+
+// Recreate __dirname in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
