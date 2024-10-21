@@ -120,3 +120,21 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
+
+if (process.env.NODE_ENV || "development") {
+  // Serve static files from the React app
+  app.use(
+    express.static("d3ai-front/dist", {
+      etag: false,
+      lastModified: false,
+      setHeaders: (res, path) => {
+        res.setHeader("Cache-Control", "no-store");
+      }
+    })
+  );
+
+  // Serve the React app for all non-API routes
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve("d3ai-front", "dist", "index.html"));
+  });
+}
