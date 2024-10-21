@@ -2,7 +2,7 @@ version: '3.3'
 services:
   d3aiDatabase:
     image: mysql:latest
-    container_name: mysql_container
+    container_name: d3ai_mysql_container
     restart: always
     environment:
       MYSQL_DATABASE: d3ai
