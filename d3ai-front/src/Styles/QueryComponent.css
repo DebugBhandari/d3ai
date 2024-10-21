@@ -1,0 +1,53 @@
+.query_component {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0;
+  background-color: #f5f5f5;
+  width: 100%;
+  min-height: 400px;
+  box-shadow: inset 0px -11px 8px -10px rgba(0, 0, 0, 0.1);
+  color: black;
+  margin-top: 140px;
+}
+
+.query_comp_form {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+  background-color: #f5f5f5;
+  color: black;
+}
+
+#subject {
+  width: 300px;
+  height: 40px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+#description {
+  width: 300px;
+  height: 80px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .query_component {
+    flex-direction: column;
+  }
+}
