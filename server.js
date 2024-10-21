@@ -3,12 +3,13 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import mysql from "mysql2/promise";
 const app = express();
-const port = 3333;
 import cors from "cors";
 
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 import { createUser, findByEmail, findOrCreate } from "./auth-helpers.js";
+
+app.set("port", process.env.PORT || 3002);
 
 // Create a MySQL connection
 export const dbConfig = {
