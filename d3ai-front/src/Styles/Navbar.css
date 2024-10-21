@@ -74,7 +74,26 @@
   transition: border-color 0.25s;
   background-color: #646cff;
   max-width: 200px;
+  color: white;
 }
 .signin_button:hover {
   background-color: #9d9df0;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar_logo_title h6 {
+    display: none;
+  }
+  .navbar {
+    justify-content: space-around;
+  }
+  .signin_button {
+    font-size: 0.8em;
+  }
+  .navbar_menu {
+    min-width: 160px;
+  }
+  .navbar_logo_title {
+    width: 100px;
+  }
 }
