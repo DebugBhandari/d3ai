@@ -6,9 +6,9 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: d3ai
-      MYSQL_ROOT_PASSWORD: kirk824
+      MYSQL_ROOT_PASSWORD: kirk8242
     ports:
-      - "3306:3306"
+      - "3307:3307"
     volumes:
       - mysql_data:/var/lib/mysql
   jobdlink:
@@ -17,9 +17,9 @@ services:
       - "3002:3002"
     environment:
       MYSQL_DATABASE: d3ai
-      MYSQL_PORT: 3306
+      MYSQL_PORT: 3307
       MYSQL_USER: root
-      MYSQL_PASSWORD: kirk824
+      MYSQL_PASSWORD: kirk8242
       MYSQL_HOST: d3aiDatabase
       PORT: 3002
       NODE_ENV: production
