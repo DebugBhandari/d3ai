@@ -35,8 +35,8 @@ const intializeDB = async () => {
     );
     await connection.end();
     console.log("Database initialized");
-    app.listen(port, () => {
-      console.log(`Example app listening on port ${port}`);
+    app.listen(app.get("port"), () => {
+      console.log(`Example app listening on port ${app.get("port")}`);
     });
   } catch (error) {
     console.error("Error initializing database:", error);
