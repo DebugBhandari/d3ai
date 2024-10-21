@@ -1,4 +1,4 @@
-name: d3ai CI/CD Pipeline
+name: d3aiml CI/CD Pipeline
 
 on:
   push:
