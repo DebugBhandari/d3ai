@@ -122,8 +122,7 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
-
-if (process.env.NODE_ENV || "development") {
+if (process.env.NODE_ENV === "production") {
   // Serve static files from the React app
   app.use(
     express.static("d3ai-front/dist", {
@@ -137,6 +136,6 @@ if (process.env.NODE_ENV || "development") {
 
   // Serve the React app for all non-API routes
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve("d3ai-front", "dist", "index.html"));
+    res.sendFile(path.resolve(__dirname, "d3ai-front", "dist", "index.html"));
   });
 }
