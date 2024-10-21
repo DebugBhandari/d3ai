@@ -10,7 +10,7 @@ const Register = () => {
     const handleRegister = () => {
         // Perform registration logic here
         console.log('Registering user:', { email, fullname, password });
-        axios.post('http://localhost:3002/register', { fullname, email, password })
+        axios.post('https://d3ai.jobd.link/register', { fullname, email, password })
             .then((response) => {
                 console.log('Registration successful:', response.data);
                 alert('Registration successful');

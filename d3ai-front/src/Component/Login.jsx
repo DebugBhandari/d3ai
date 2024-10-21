@@ -21,7 +21,7 @@ const Login = () => {
         // Add your login logic here
         console.log('Email:', email);
         console.log('Password:', password);
-        axios.post('http://localhost:3002/login', { email, password })
+        axios.post('https://d3ai.jobd.link/login', { email, password })
             .then((response) => {
                 console.log('Login successful:', response.data);
                 setActiveUser(response.data);
