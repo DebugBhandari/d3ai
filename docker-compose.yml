@@ -8,10 +8,12 @@ services:
       MYSQL_DATABASE: d3ai
       MYSQL_ROOT_PASSWORD: kirk8242
     ports:
-      - "3307:3307"
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-  jobdlink:
+    networks:
+      sharedDatabase: {}
+  d3ai:
     image: d3ai:latest
     ports:
       - "3002:3002"
@@ -25,6 +27,13 @@ services:
       NODE_ENV: production
     depends_on:
       - d3aiDatabase
+    networks:
+      sharedDatabase: {}
+
+networks:
+  default:
+    name: sharedDatabase
+    attachable: true
 
 volumes:
   mysql_data:
