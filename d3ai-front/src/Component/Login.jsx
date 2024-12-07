@@ -2,6 +2,8 @@ import { useState } from 'react';
 import "../Styles/Login.css";
 import axios from 'axios';
 import useZuStore from '../zuStore';
+import { baseUrl } from '../config/constants';
+import Button from '@mui/material/Button';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -21,7 +23,7 @@ const Login = () => {
         // Add your login logic here
         console.log('Email:', email);
         console.log('Password:', password);
-        axios.post('https://d3ai.jobd.link/login', { email, password })
+        axios.post(`${baseUrl}/login`, { email, password })
             .then((response) => {
                 console.log('Login successful:', response.data);
                 setActiveUser(response.data);
@@ -37,17 +39,20 @@ const Login = () => {
 
     return (
         <div className="login_component">
-            <h2>Login</h2>
+            <h2 style={{color:"#1976d2"}}>Sign In</h2>
+            <p style={{marginBottom:"20px"}}>Please sign in to continue.</p>
             <form onSubmit={handleSubmit} className="login_comp_form">
                
-                    <label>Email:</label>
-                    <input type="email" value={email} onChange={handleEmailChange} className="login_input"/>
+                    
+                    <input type="email" value={email} onChange={handleEmailChange} className="login_input" placeholder="Email"/>
                
                 
-                    <label>Password:</label>
-                    <input type="password" value={password} onChange={handlePasswordChange} className="login_input" />
+                    
+                    <input type="password" value={password} onChange={handlePasswordChange} className="login_input" placeholder="Password" />
                 
-                <button type="submit" className="signin_button" >Login</button>
+                {/* <button type="submit" className="signin_button" >Login</button> */}
+                <Button variant="contained" color="primary" type="submit" sx={{marginBottom:"20px"}}>Login</Button>
+                <p> Don&apos;t have an account? <br></br><a href="/register" className="login_link">Register here</a></p>
             </form>
         </div>
     );

@@ -6,14 +6,32 @@ const app = express();
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import Stripe from "stripe";
 
 // Recreate __dirname in ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+app.use(cors());
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
-import { createUser, findByEmail, findOrCreate } from "./auth-helpers.js";
+import {
+  createUser,
+  findByEmail,
+  findOrCreate,
+  updateUserWithStripe
+} from "./auth-helpers.js";
+
+export const baseUrl =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3002"
+    : "https://d3ai.jobd.link";
+
+export const clientUrl =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:5173"
+    : "https://d3ai.jobd.link";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 app.set("port", process.env.PORT || 3002);
 
@@ -31,13 +49,13 @@ export const dbConfig = {
   database: process.env.MYSQL_DATABASE,
   port: process.env.MYSQL_PORT
 };
-app.use(cors());
+
 const intializeDB = async () => {
   try {
     const connection = await mysql.createConnection(dbConfig);
     await connection.query("CREATE DATABASE IF NOT EXISTS d3ai");
     await connection.query(
-      "Create table if not exists users (id int primary key auto_increment, fullname varchar(255), email varchar(255), password varchar(255), created_at timestamp default current_timestamp)"
+      "Create table if not exists users (id int primary key auto_increment, fullname varchar(255), email varchar(255), password varchar(255), stripe_customer_id varchar(255), created_at timestamp default current_timestamp)"
     );
     await connection.end();
     console.log("Database initialized");
@@ -96,7 +114,8 @@ app.post("/login", (req, res) => {
       res.json({
         token: token,
         fullname: results[0].fullname,
-        email: results[0].email
+        email: results[0].email,
+        stripeCustomerId: results[0].stripe_customer_id
       });
     });
   });
@@ -127,6 +146,42 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
+
+app.get("/prebook", async (req, res) => {
+  const priceId = process.env.STRIPE_PRICE_ID;
+  const session = await stripe.checkout.sessions.create({
+    mode: "payment",
+    line_items: [
+      {
+        price: priceId,
+        quantity: 1
+      }
+    ],
+    customer_creation: "always",
+    success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${baseUrl}/cancel`
+  });
+  res.redirect(session.url);
+});
+
+app.get("/success", async (req, res) => {
+  const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+  console.log(session);
+  findByEmail(session.customer_details.email.toLowerCase()).then((results) => {
+    if (results.length === 0) {
+      console.error("User not found");
+      res.status(500).json({ error: "Internal server error" });
+      return;
+    }
+    updateUserWithStripe(results[0].id, session.customer);
+  });
+  res.redirect(clientUrl);
+});
+
+app.get("/cancel", (req, res) => {
+  res.redirect(clientUrl);
+});
+
 if (process.env.NODE_ENV === "production") {
   // Serve static files from the React app
   app.use(

@@ -2,10 +2,11 @@
   "name": "d3dashboard",
   "version": "1.0.0",
   "description": "Charts dashboard for d3AI.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon"
   },
   "author": "Deepak Bhandari",
   "license": "ISC",
@@ -19,6 +20,10 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.11.3",
     "path": "^0.12.7",
+    "stripe": "^17.4.0",
     "url": "^0.11.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

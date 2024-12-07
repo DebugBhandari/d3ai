@@ -1,13 +1,12 @@
-import ChartsDiv from "./ChartsDiv";
-import QueryComponent from "./QueryComponent";
+
 import "../Styles/index.css";
+import ProductCard from "./ProductCard";
 
 
 export default function Dashboard() {
   return (
     <div className="dashboard">
-      <QueryComponent />
-      <ChartsDiv />
+     <ProductCard/>
     </div>
   )
 }

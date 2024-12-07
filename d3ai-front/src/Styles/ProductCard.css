@@ -1,4 +1,4 @@
-.login_component {
+.productCard {
   display: flex;
   position: relative;
   justify-content: center;
@@ -7,49 +7,37 @@
   flex-direction: column;
   padding: 0;
   background-color: #f5f5f5;
-  width: 60%;
+  width: 600px;
   min-height: 600px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: black;
 }
 
-.login_comp_form {
-  width: 400px;
+.productCard_info {
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
+  width: 400px;
   background-color: #f5f5f5;
   color: black;
 }
 
-.login_input {
-  width: 200px;
-  height: 20px;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  background-color: #f5f5f5;
-  color: rgb(0, 0, 0);
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.25s;
-  margin: 10px;
-}
-
-.login_link {
-  color: black;
-
-  margin: 10px;
+.cardImage {
+  width: 300px;
+  height: 200px;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 768px) {
-  .login_component {
+  .productCard {
     width: 92%;
   }
-  .login_comp_form {
+  .productCard_info {
     width: 100%;
   }
-  .login_input {
-    width: 160px;
+  .cardImage {
+    width: 200px;
+    height: 150px;
   }
 }
