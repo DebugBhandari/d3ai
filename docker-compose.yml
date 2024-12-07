@@ -12,6 +12,10 @@ services:
       MYSQL_HOST: jatDatabase  # Uses the external MySQL container from jobdlink
       PORT: 3002
       NODE_ENV: production
+      VITE_NODE_ENV: production
+      STRIPE_SECRET_KEY: sk_test_51QS3VoHT69KzW4TxVfqRtcpieKv2JekhMHcBzHo6LiSH9w6Ezef5lZDv2zd27N2cpTTQyJC9eAoRyPaZhL2k4ePG009YhOTFaU
+      STRIPE_PRICE_ID: price_1QTOXeHT69KzW4Txselb6MND
+
     networks:
       - sharedDatabase
 
